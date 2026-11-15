@@ -13,10 +13,12 @@
     "@heroui/react": "^3.2.7",
     "@heroui/styles": "^3.2.7",
     "better-auth": "^1.7.23",
+    "lucide-react": "^1.73.0",
     "mongodb": "^7.9.0",
     "next": "16.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-hot-toast": "^2.6.1"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "4.3.3",

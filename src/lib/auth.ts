@@ -4,11 +4,11 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URL) {
+if (!MONGODB_URI) {
   throw new Error(
-    "MONGODB_URL is missing from environment variables."
+    "MONGODB_URI is missing from environment variables."
   );
 }
 
@@ -22,7 +22,7 @@ if (!authSecret || authSecret.length < 32) {
 }
 
 // MongoDB client
-const mongoClient = new MongoClient(MONGODB_URL);
+const mongoClient = new MongoClient(MONGODB_URI);
 
 const database = mongoClient.db(
   process.env.MONGODB_DB_NAME || "bazardor"
@@ -67,13 +67,16 @@ const socialProviders = {
 export const auth = betterAuth({
   database: mongodbAdapter(database, {
     client: mongoClient,
+    disableAutoCreateIndex: true, 
   }),
 
   baseURL:
-    process.env.BETTER_AUTH_URL ||
+    process.env.BETTER_AUTH_URI ||
     "http://localhost:3000",
 
   secret: authSecret,
+
+   
 
   emailAndPassword: {
     enabled: true,
@@ -81,4 +84,12 @@ export const auth = betterAuth({
   },
 
   socialProviders,
+
+  advanced: {
+    database: {
+      generateId: false,
+    },
+   
+  }
 });
+

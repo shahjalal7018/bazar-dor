@@ -67,6 +67,7 @@ const socialProviders = {
 export const auth = betterAuth({
   database: mongodbAdapter(database, {
     client: mongoClient,
+      //@ts-ignore 
     disableAutoCreateIndex: true, 
   }),
 
